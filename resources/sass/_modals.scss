@@ -1,0 +1,43 @@
+
+.item-form, .column-form{
+    padding: 10px 20px;
+    &__title{
+        h3{
+            font-size: 16px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+    }
+    &__group{
+        &__label{
+            display: block;
+        }
+        &__input{
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    }
+    &__footer{
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        padding-top: 20px;
+    }
+    &__actions{
+        display: flex;
+    }
+    &__cancel{
+        @include button-secondary;
+        margin-right: 10px;
+        font-size: 14px;
+    }
+    &__submit{
+        @include button-primary;
+        font-size: 14px;
+    }
+}
