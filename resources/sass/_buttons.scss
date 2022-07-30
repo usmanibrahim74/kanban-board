@@ -19,7 +19,6 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    width: 100%;
     border: 1px solid #222;
     box-shadow: 0 1px 0 rgb(9 30 66 / 25%);
     
@@ -34,4 +33,7 @@
     background-color: $button-secondary-bg;
     color: $button-secondary-text_color;
     border: $button-secondary-border;
+}
+.button--block{
+    width: 100%;
 }

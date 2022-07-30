@@ -26,3 +26,16 @@ Route::get('list-cards', [CardController::class, "filter"]);
 Route::post('cards', [CardController::class, "store"]);
 Route::post('cards/reorder', [CardController::class, "reorder"]);
 
+
+Route::get('export', function(){
+    $fileName = time().".sql";
+    Spatie\DbDumper\Databases\MySql::create()
+    ->setDbName(env('DB_DATABASE'))
+    ->setUserName(env('DB_USERNAME'))
+    ->setPassword(env('DB_PASSWORD'))
+    ->dumpToFile($fileName);
+    
+    return response()->json([
+        'file' => $fileName
+    ]);
+});

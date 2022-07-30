@@ -6,13 +6,21 @@
           Kanban Board
         </h2>
         <div class="header__action">
-          <button
+            <button
             class="
               header__button button button--primary
             "
             @click="addColumn"
           >
             Add Column
+          </button>
+          <button
+            class="
+              header__button button button--secondary
+            "
+            @click="exportDb"
+          >
+            Export DB
           </button>
         </div>
       </div>
@@ -55,7 +63,7 @@
               </h4>
             </div>
           </draggable>
-          <button class="col__card__button button button--primary" @click="addItem(col.id)">
+          <button class="col__card__button button button--primary button--block" @click="addItem(col.id)">
             Add Card
           </button>
           </div>
@@ -183,6 +191,21 @@ export default {
     this.getColumns();
   },
   methods: {
+    exportDb(){
+      axios.get('/api/export').then(({ data }) => {
+        var dlink = document.createElement('a');
+        dlink.download = data.file;
+        dlink.href = data.file;
+        dlink.onclick = function(e) {
+            setTimeout(() => {
+                window.URL.revokeObjectURL(this.href);
+            }, 1500);
+        };
+
+        dlink.click();
+        dlink.remove();
+      });
+    },
     getColumns() {
       axios.get("/api/columns").then(({ data }) => {
         this.columns = data;
