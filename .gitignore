@@ -18,3 +18,4 @@ phpunit.dusk.xml
 /.history
 package-lock.json
 composer.lock
+/public/*.sql
