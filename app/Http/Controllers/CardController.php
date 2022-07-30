@@ -8,19 +8,11 @@ use Illuminate\Http\Request;
 
 class CardController extends Controller
 {
-    /**
-     * Display a listing of the resource of specific column.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function cards($column_id)
-    {
-        return Card::where('column_id',$column_id)->get();
-    }
 
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function filter(Request $request)
@@ -57,28 +49,30 @@ class CardController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCardRequest  $request
+     * @param  \App\Http\Requests\CardRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(CardRequest $request)
     {
         
-        if($request->id){
-            Card::where('id',$request->id)->update($request->validated());
-        }else{
+        if(!$request->id){
             $count = Card::count();
             $card = new Card();
             $card->fill($request->validated());
             $card->order = $count+1;
-            $card->save();
+            return $card->save();
         }
+
+        return Card::where('id',$request->id)->update($request->validated());
+
+
 
     }
 
     /**
      * reorder a resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCardRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function reorder(Request $request)
@@ -93,17 +87,6 @@ class CardController extends Controller
                 $orderNum++;
             }
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Card  $card
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Card $card)
-    {
-        return $card;
     }
 
 

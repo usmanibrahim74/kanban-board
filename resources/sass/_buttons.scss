@@ -1,4 +1,4 @@
-@mixin button {
+.button {
     border-radius: 4px;
     border-style: none;
     box-sizing: border-box;
@@ -25,14 +25,12 @@
     
 }
 
-@mixin button-primary {
-    @include button;
+.button--primary {
     background-color: $button-primary-bg;
     color: $button-primary-text_color;
     border: $button-primary-border;
 }
-@mixin button-secondary {
-    @include button;
+.button--secondary {
     background-color: $button-secondary-bg;
     color: $button-secondary-text_color;
     border: $button-secondary-border;

@@ -2,97 +2,97 @@ body{
     font-family: $font-family;
 }
 
-.kanban{
-    &__header{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-        
-        &__title{
-            h2{
-                margin: 0;
-            }
-        }
-        &__add-column{
-            @include button-primary;
-            
-        }
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    
+    &__title{
+        margin: 0;
     }
-    &__board {
-        display: grid;
-        grid-auto-columns: 272px;
-        grid-auto-flow: column;
-        grid-gap: 8px;
-        min-height: calc(100vh - 80px);
-        overflow: auto;
-        padding: 0 20px;
-        &__column {
-            background: #EBECF0;
-            border-radius: 3px;
-            display: grid;
-            grid-auto-rows: max-content;
-            grid-gap: 0px;
-            padding: 10px;
-            &__header{
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
-            &__actions{
-                display: flex;
-
-            }
-            &__edit{
-                width: 20px;
-                height: 20px;
-                background-color: blue;
-                cursor: pointer;
-                margin-right: 8px;
-            }
-            &__delete{
-                width: 20px;
-                height: 20px;
-                background-color: red;
-                cursor: pointer;
-            }
-            &__title > h3 {
-
-                font-size: 18px;
-                margin: 8px 0 12px 0;
-            }
-            &__cards{
-                min-height: 20px;
-            }
-            &__card{
-                
-                background: #FFF;
-                box-shadow: 0 1px 0 rgba(9,30,66,.25);
-                border-radius: 3px;
-                padding: 14px 10px;
-                cursor: pointer;
-                margin-bottom: 8px;
-                display: flex;
-                align-items: center;
-                &__handle{
-                    width: 18px;
-                    height: 18px;
-                    background-color: gray;
-                    margin-right: 10px;
-
-                }
-                &__title{
-                    h4{
-                        font-size: 14px;
-                        margin: 0;
-                        
-                    }
-                }
-            }
-          }
-        &__add-card{
-            @include button-primary;
-            font-size: 14px;
-        }
-      }
 }
+.board {
+    display: grid;
+    grid-auto-columns: 272px;
+    grid-auto-flow: column;
+    grid-gap: 8px;
+    min-height: calc(100vh - 80px);
+    overflow: auto;
+    padding: 0 20px;
+
+    &__item{
+        background: #EBECF0;
+        border-radius: 3px;
+        display: grid;
+        grid-auto-rows: max-content;
+        grid-gap: 0px;
+        padding: 10px;
+    }
+    
+  }
+
+.col {
+
+&__header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+&__actions{
+    display: flex;
+}
+&__action{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    
+    &--edit{
+        background-color: blue;
+        margin-right: 8px;
+    }
+    
+    &--delete{
+        width: 20px;
+        height: 20px;
+        background-color: red;
+        cursor: pointer;
+    }
+}
+
+&__title {
+
+    font-size: 18px;
+    margin: 8px 0 12px 0;
+}
+&__cards{
+    min-height: 20px;
+}
+&__card{
+    
+    background: #FFF;
+    box-shadow: 0 1px 0 rgba(9,30,66,.25);
+    border-radius: 3px;
+    padding: 14px 10px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    &__handle{
+        width: 18px;
+        height: 18px;
+        background-color: gray;
+        margin-right: 10px;
+
+    }
+    &__title{
+        font-size: 14px;
+            margin: 0;
+    }
+    &__button{
+        font-size: 14px;
+    }
+}
+}
+  

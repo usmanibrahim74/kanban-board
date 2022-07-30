@@ -16,15 +16,6 @@ class ColumnController extends Controller
         return Column::with(['cards'])->get();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Card  $card
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id){
-        return Column::find($id);
-    }
 
     /**
      * Store a newly created resource in storage.
