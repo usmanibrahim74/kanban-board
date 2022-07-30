@@ -25,11 +25,11 @@
             </h3>
             <div class="col__actions">
               <div
-                class="col__action col--edit"
+                class="col__action col__action--edit"
                 @click="editColumn(col)"
               ></div>
               <div
-                class="col__action col--delete"
+                class="col__action col__action--delete"
                 @click="deleteColumn(col)"
               ></div>
             </div>
@@ -64,7 +64,7 @@
     </div>
 
     <!-- Card Add/Edit Modal -->
-    <modal name="modal" height="auto">
+    <modal name="item-form" height="auto">
       <form class="modal" @submit.prevent="saveItem">
         <h3 class="modal__title">{{ item.id ? "Edit" : "Add" }} Card</h3>
         <div class="modal__group">
@@ -126,10 +126,10 @@
 
         <div class="modal__footer">
           <div class="modal__actions">
-            <button class="modal__cancel" @click="cancelColumn" type="button">
+            <button class="modal__cancel button button--secondary" @click="cancelColumn" type="button">
               Cancel
             </button>
-            <button class="modal__submit" type="submit">Submit</button>
+            <button class="modal__submit button button--primary" type="submit">Submit</button>
           </div>
         </div>
       </form>
@@ -144,10 +144,10 @@
 
         <div class="modal__footer">
           <div class="modal__actions">
-            <button class="modal__cancel" @click="cancelColumn" type="button">
+            <button class="modal__cancel button button--secondary" @click="cancelColumnDelete" type="button">
               Cancel
             </button>
-            <button class="modal__submit" type="submit">Delete</button>
+            <button class="modal__submit button button--primary" type="submit">Delete</button>
           </div>
         </div>
       </form>
@@ -191,24 +191,27 @@ export default {
     addColumn() {
       let id, title;
       this.column = { id, title, cards: [] };
-      this.$modal.show("modal");
+      this.$modal.show("column-form");
     },
     editColumn({ id, title }) {
       this.column = { id, title };
-      this.$modal.show("modal");
+      this.$modal.show("column-form");
     },
     saveColumn() {
       axios.post("api/columns", this.column).then((response) => {
         this.getColumns();
-        this.$modal.hide("modal");
+        this.$modal.hide("column-form");
       });
     },
     cancelColumn() {
-      this.$modal.hide("modal");
+      this.$modal.hide("column-form");
     },
     deleteColumn({ id, title }) {
       this.column = { id, title };
       this.$modal.show("column-delete");
+    },
+    cancelColumnDelete(){
+      this.$modal.hide("column-delete");
     },
     submitDeleteColumn() {
       axios.delete(`api/columns/${this.column.id}`).then((response) => {
@@ -218,21 +221,21 @@ export default {
     },
     editItem({ id, title, description, column_id }) {
       this.item = { id, title, description, column_id };
-      this.$modal.show("modal");
+      this.$modal.show("item-form");
     },
     addItem(column_id) {
       let id, title, description;
       this.item = { id, title, description, column_id };
-      this.$modal.show("modal");
+      this.$modal.show("item-form");
     },
     cancel() {
-      this.$modal.hide("modal");
+      this.$modal.hide("item-form");
     },
     saveItem() {
       let index = this.columns.findIndex((c) => c.id == this.item.column_id);
       axios.post("api/cards", this.item).then((response) => {
         this.getColumns();
-        this.$modal.hide("modal");
+        this.$modal.hide("item-form");
       });
     },
     storeOrder(event) {
